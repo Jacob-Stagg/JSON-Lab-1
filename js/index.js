@@ -3,8 +3,7 @@ var randomInt = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-window.onload = function()
-{
+window.onload = function() {
 	// lets git the HTML canvas element so we draw on it
 	var canvas = document.getElementById("c");
 	var ctx = canvas.getContext("2d");
@@ -12,16 +11,15 @@ window.onload = function()
 	var W = document.getElementById("result").offsetWidth, /// get the width of our window
 		H = document.getElementById("result").offsetHeight; // get the height
 
-	console.log(document.getElementById("result").style.height);
+	//console.log(document.getElementById("result").style.height);
 	// set our canvas to our siz of Width and Height
 	canvas.width = W;
 	canvas.height = H;
 
-	//console.log("my color request: "+colorsArray);
+	//console.log("my color request: " + colorsArray);
 
 	/*===============Box class=================================*/
-	function Box(_x, _y)
-	{
+	function Box(_x, _y) {
 		// the X/Y position
 		this.x = _x;
 		this.y = _y;
@@ -35,14 +33,14 @@ window.onload = function()
 		this.height = 20;
 
 		//random colors for our box
-		/*this.r = Math.round(Math.random()*255);
+		this.r = Math.round(Math.random()*255);
 		this.g = Math.round(Math.random()*255);
-		this.b = Math.round(Math.random()*255);*/
+		this.b = Math.round(Math.random()*255);
 
-		this.randomColor = randomInt(0,colorsArray.colors.length-1);
-		this.r = colorsArray.colors[this.randomColor].red;
-		this.g = colorsArray.colors[this.randomColor].green;
-		this.b = colorsArray.colors[this.randomColor].blue;
+//		this.randomColor = randomInt(0,colorsArray.colors.length-1);
+//		this.r = colorsArray.colors[this.randomColor].red;
+//		this.g = colorsArray.colors[this.randomColor].green;
+//		this.b = colorsArray.colors[this.randomColor].blue;
 
 		console.log(colorsArray);
 
@@ -50,8 +48,7 @@ window.onload = function()
 		this.rgba = "rgba("+this.r+","+this.g+","+this.b+",1)";
 
 		//lets make draw method for out box
-		this.draw = function()
-		{
+		this.draw = function() {
 			ctx.strokeStyle = this.rgba;
 			ctx.strokeRect(this.x,this.y,this.width,this.height);
 
@@ -59,24 +56,22 @@ window.onload = function()
 		}
 
 		//function that handle our logincss for our box
-		this.update = function()
-		{
+		this.update = function() {
 			//lets check if the ball get out of our screen and when it does that , make it bounce
 			//check the left window border
-			if(this.x<0){
+			if(this.x<0) {
 				this.x = 0;		//set its position to 0
 				this.xVel *= -1; //make it bounce
 			}
 
 			//check the right border
-			if(this.x > W - this.width)
-			{
+			if(this.x > W - this.width) {
 				this.x = W - this.width; //set its position to 0
 				this.xVel *= -1; //make it bounce
 			}
 
 			//check the top border
-			if(this.y < 0){
+			if(this.y < 0) {
 				this.y = 0;	//this is what happen when u copy/paste
 				this.yVel *= -1; //make it bounce
 			}
@@ -84,12 +79,12 @@ window.onload = function()
 			// the reaason why we did this if functin so the boxes dont
 			//try to add y by its belocity whe it reaches the bottom
 			//now we add gravity
-			if(this.y < H - this.height)
+			if(this.y < H - this.height) {
 				this.yVel += .25;
+			}
 
 			//check the bottom border
-			if(this.y > H - this.height)
-			{
+			if(this.y > H - this.height) {
 				//when it bounces off the bottom decrease the ball speed
 				this.xVel *= .5;
 				this.yVel *= .5;
@@ -108,8 +103,7 @@ window.onload = function()
 	var boxes = [];
 
 	// Function to draw stuff on our screen :)
-	function draw()
-	{
+	function draw() {
 		//Background
 		ctx.globalCompositeOperation = "source-over";
 		ctx.fillStyle = 'rgba(32,38,57,0.5)';
@@ -125,8 +119,7 @@ window.onload = function()
 	}
 
 	//Function for our logic
-	function update()
-	{
+	function update() {
 		for(i=0; i<boxes.length; i++)
 			boxes[i].update();
 	}
